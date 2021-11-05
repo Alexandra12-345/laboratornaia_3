@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Лабораторная работа 3</title>
+    <meta charset="utf-8">
+    <script type="text/javascript">
+        //функция для создания массива пользователем
+        function formMas(){
+            var n = Number(prompt("Введите количество элементов:"));
+            var nMas = [];
+            for(var i=0; i<n; i++){
+                nMas[i]=Number(prompt("Введите число:"));
+            }
+            return nMas;
+        }
+
+        //функция для поиска индекса минимального по модулю элемента
+        function findMinInd(mas){
+            var min=0;
+            for(var i=1; i<mas.length; i++){
+                if(Math.abs(mas[i])<Math.abs(mas[min])){
+                    min=i;
+                }
+            }
+            return min;
+        }
+        
+        var mass = formMas();
+
+        //Поиск минимального по модулю элемента
+        var minInd=findMinInd(mass);
+        var minim=mass[minInd];
+        
+
+
+        //подсчет суммы модулей чисел после первого нуля
+        var ind0;
+        for(var n=0; n<mass.length; n++){
+            if(mass[n]===0){
+                ind0=n;
+                break;
+            }
+        }
+        var sumModuls = 0;
+        for(var k = ind0+1; k<mass.length; k++){
+            sumModuls+=Math.abs(mass[k]);
+        }
+
+        //массив, где сначала стоят элементы, которые стояли в четных позициях, а затем элементы, стоявшие на нечетных позициях
+        var chet=[];
+        var nechet=[];
+        for(var l = 0;l<mass.length; l++){
+            if(l%2==0){
+                chet.push(mass[l]);
+            }
+            else{
+                nechet.push(mass[l]);
+            }
+        }
+        mass=chet.concat(nechet);
+
+        var str = mass.join("; ");
+        document.writeln("Минимального по модулю элемент: "+minim+"; Сумма модулей чисел после первого нуля "+sumModuls+"; Массив, где сначала стоят элементы, которые стояли в четных позициях, а затем элементы, стоявшие на нечетных позициях: "+str);
+    </script>
+</head>
+<body>
+</body>
+</html>
